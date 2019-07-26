@@ -57,8 +57,13 @@ public class Game extends JFrame implements Runnable {
 		BufferedImage sheetImage = loadImage("assets/Tiles1.png");
 		sheet = new SpriteSheet(sheetImage);
 		sheet.loadSprites(16, 16);
+			
+//	System.out.println(new File("com/rpg/game/assets/Tiles.txt").getAbsoluteFile());
+		String path = "tile.txt";
+		File f = new File(path);
+		f.setReadable(true);
+		tiles = new Tiles(f, sheet);
 		
-		tiles = new Tiles(new File("assets/Tiles.txt"), sheet);
 		
 //		testSprite = sheet.getSprite(0, 0);
 		

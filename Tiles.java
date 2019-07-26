@@ -26,7 +26,7 @@ public class Tiles {
 				
 				String line = filescanner.nextLine();
 				if(!line.startsWith("//")) {
-					String[] splitString = line.split("-");
+					String[] splitString = line.split("-"); 
 					String tileName = splitString[0];
 					int spriteX = Integer.parseInt(splitString[1]);
 					int spriteY = Integer.parseInt(splitString[2]);
