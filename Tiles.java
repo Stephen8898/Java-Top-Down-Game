@@ -9,13 +9,13 @@ import java.util.Scanner;
 //This class will contain a structure(struct)
 public class Tiles {
 	
-	private SpriteSheet spritesheet;
+	private SpriteSheet spriteSheet;
 	private ArrayList<Tile> tileslist = new ArrayList<Tile>();
 	
 	//This will only work under the assumption that the sprite sheet has been loaded
 	public Tiles(File tilesFile, SpriteSheet spriteSheet) {
 		
-		this.spritesheet = spriteSheet;
+		this.spriteSheet = spriteSheet;
 		
 		try {
 		//We are using scanner to scan or read thought the files being passed
@@ -30,11 +30,11 @@ public class Tiles {
 					String tileName = splitString[0];
 					int spriteX = Integer.parseInt(splitString[1]);
 					int spriteY = Integer.parseInt(splitString[2]);
-					Tile tile = new Tile(tileName, spritesheet.getSprite(spriteX, spriteY));
+					Tile tile = new Tile(tileName, this.spriteSheet.getSprite(spriteX, spriteY));
 					tileslist.add(tile);
 				}
 				
-				filescanner.close();
+//				filescanner.close();
 			}
 		
 		} catch(FileNotFoundException e) {
