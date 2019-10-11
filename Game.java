@@ -25,6 +25,12 @@ public class Game extends JFrame implements Runnable {
 	private Rectangle testRect = new Rectangle(30, 90, 100, 110);
 	
 	private Tiles tiles;
+	private Map map;
+	
+	private KeyBoardListener keylistener = new KeyBoardListener();
+	
+	private GameObject[] objects;
+	private Player player;
 	
 	public Game() {
 		
@@ -61,17 +67,33 @@ public class Game extends JFrame implements Runnable {
 		
 		tiles = new Tiles(new File("src/com/rpg/game/assets/tile.txt"), sheet);
 		
-		
+		map = new Map(new File("src/com/rpg/game/assets/Map.txt"), tiles);
 		
 //		testSprite = sheet.getSprite(0, 0);
 		
 		testRect.generateGraphics(4, 12234);
+		
+		//load objects 
+		objects = new GameObject[1];
+		player = new Player();
+		objects[0] = player;
+		
+		
+		//add listener
+		canvas.addKeyListener(keylistener);
+		canvas.addFocusListener(keylistener);
 	}
 	
 	
 		
 	// Updates position
 		public void update() {
+			
+			//updates the game object
+			for(int i = 0; i < objects.length; i ++) {
+				// the 'this' is passing the class 'Game' into the updates method
+				objects[i].update(this);
+			}
 			
 		}
 
@@ -97,9 +119,17 @@ public class Game extends JFrame implements Runnable {
 			super.paint(graphics);
 			
 			//renderer.renderImage(testImg, 4, 2, 2, 2);
-			tiles.renderTile(0, renderer, 0, 0, 2, 2);
+//			tiles.renderTile(0, renderer, 0, 0, 2, 2);
 //			renderer.renderSprites(testSprite, 0, 0, 5, 5);
-			renderer.renderRectangle(testRect, 1, 1);
+			map.render(renderer, 3, 3);
+			
+			//renders game objects
+			for(int i = 0; i < objects.length; i ++) {
+				objects[i].render(renderer, 3, 3);
+			}
+			
+			
+//			renderer.renderRectangle(testRect, 1, 1);
 			renderer.render(graphics);
 			
 			
@@ -157,5 +187,7 @@ public class Game extends JFrame implements Runnable {
 		gamethread.start();
 	}
 
-
+	public KeyBoardListener getKeyListener() {
+		return keylistener;
+	}
 }

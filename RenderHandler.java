@@ -22,8 +22,8 @@ public class RenderHandler {
 		
 		camera = new Rectangle(0, 0, width, height);
 		
-		camera.setX(-100); 
-		camera.setY(-30);
+		camera.x = -100; 
+		camera.y = -30;
 		
 	}
 	
@@ -49,7 +49,7 @@ public class RenderHandler {
 		
 		int [] rectanglePixels = rectangle.getPixels();
 		if(rectanglePixels != null)
-			renderArray(rectanglePixels, rectangle.getW(), rectangle.getH(), rectangle.getX(), rectangle.getY(), xZoom, yZoom);
+			renderArray(rectanglePixels, rectangle.w, rectangle.h, rectangle.x, rectangle.y, xZoom, yZoom);
 	}
 	
 	public void renderArray(int[] renderPixels, int renderWidth, int renderHeight, int xPosition, int yPosition, int xZoom, int yZoom) {
@@ -66,14 +66,18 @@ public class RenderHandler {
 	
 	private void setPixel(int pixel, int x, int y) {
 		
- 		if(x >= camera.getX() && y >= camera.getY() && x <= camera.getW() &&  y <= camera.getY() + camera.getH()) {		
+ 		if(x >= camera.x && y >= camera.y && x <= camera.w &&  y <= camera.y + camera.h) {		
  			
- 			int pixelIndex = (x - camera.getX()) + (y - camera.getY()) * view.getWidth();
+ 			int pixelIndex = (x - camera.x) + (y - camera.y) * view.getWidth();
  			if (pixels.length > pixelIndex && pixel != Game.alpha) {
  				pixels[pixelIndex] = pixel;
  			}
  		}
 	}
 	
+	public Rectangle getCamera() {
+		
+		return camera;
+	}
 	
 }
